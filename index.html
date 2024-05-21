@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <h1>To-do-list</h1>
+  <input type="text" id="new-task" placeholder="Add a nem task...">
+  <button id="add-task-btn">Add Task</button>
+  <ul id="task-list">
+  </ul>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const newTask = document.getElementById('new-task')
+        const addTaskBtn = document.getElementById('add-task-btn')
+        const taskList = document.getElementById('task-list')
+
+        const addTask = () => {
+            const taskText = newTask.value
+            if(taskText != ''){
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${taskText}</span> <button class="delet-btn">Delete</button>`;
+                taskList.appendChild(li);
+
+                li.querySelector('.delet-btn').addEventListener('click', () => {
+                li.remove()
+                })
+
+                li.addEventListener('click', () => {
+                li.classList.toggle('completed')})
+
+                newTask.value = ''
+            }
+        }
+
+        addTaskBtn.addEventListener('click', addTask)
+
+        newTask.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter'){
+                addTask()
+            }
+        })
+        
+        
+    })
+  </script>
+</body>
+</html>
